@@ -2,13 +2,15 @@ package com.dkgtech.ecommerceapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.denzcoskun.imageslider.ImageSlider
-import com.denzcoskun.imageslider.constants.ScaleTypes
-import com.denzcoskun.imageslider.models.SlideModel
-import com.dkgtech.ecommerceapp.adapter.RecyclerCategoryAdapter
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import com.dkgtech.ecommerceapp.databinding.ActivityMainBinding
-import com.dkgtech.ecommerceapp.model.CategoryModel
+import com.dkgtech.ecommerceapp.ui.CartFragment
+import com.dkgtech.ecommerceapp.ui.FavouriteFragment
+import com.dkgtech.ecommerceapp.ui.HomeFragment
+import com.dkgtech.ecommerceapp.ui.MenuFragment
+import com.dkgtech.ecommerceapp.ui.ProfileFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -18,24 +20,31 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         with(binding) {
 
-            val imageList = ArrayList<SlideModel>()
-            imageList.add(SlideModel(R.drawable.banner_1))
-            imageList.add(SlideModel(R.drawable.banner_2))
-            imageList.add(SlideModel(R.drawable.banner_3))
+            loadFragment(HomeFragment())
 
-            val imageSlider = findViewById<ImageSlider>(R.id.image_slider)
-            imageSlider.setImageList(imageList)
-            imageSlider.setImageList(imageList, ScaleTypes.CENTER_CROP)
+            bnView.setOnItemSelectedListener { item ->
+                when (item.itemId) {
+                    R.id.nav_menu -> loadFragment(MenuFragment())
+                    R.id.nav_home -> loadFragment(HomeFragment())
+                    R.id.nav_fav -> loadFragment(FavouriteFragment())
+                    R.id.nav_cart -> loadFragment(CartFragment())
+                    R.id.nav_profile -> loadFragment(ProfileFragment())
+                }
+                true
+            }
 
-            rcViewCategory.layoutManager = LinearLayoutManager(this@MainActivity,LinearLayoutManager.HORIZONTAL,false)
-            val categoryList = ArrayList<CategoryModel>()
-            categoryList.add(CategoryModel("Shoes", R.drawable.cat_shoes))
-            categoryList.add(CategoryModel("Beauty", R.drawable.cat_beauty))
-            categoryList.add(CategoryModel("Women's\nFashion", R.drawable.cat_womens))
-            categoryList.add(CategoryModel("Jewellery", R.drawable.cat_jewellery))
-            categoryList.add(CategoryModel("Men's\nFashion", R.drawable.cat_men))
-            rcViewCategory.adapter = RecyclerCategoryAdapter(this@MainActivity, categoryList)
 
         }
+    }
+
+    private fun loadFragment(fragment: Fragment) {
+        val fragmentManager: FragmentManager = supportFragmentManager
+        val transaction: FragmentTransaction = fragmentManager.beginTransaction()
+
+        // Replace the fragment_container with the new fragment
+        transaction.replace(R.id.container, fragment)
+        // Commit the transaction
+        transaction.attach(HomeFragment())
+        transaction.commit()
     }
 }

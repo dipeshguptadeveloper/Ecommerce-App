@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dkgtech.ecommerceapp.databinding.CategoryRowBinding
 import com.dkgtech.ecommerceapp.model.CategoryModel
+import com.squareup.picasso.Picasso
 
 class RecyclerCategoryAdapter(val context: Context, val categoryList: ArrayList<CategoryModel>) :
     RecyclerView.Adapter<RecyclerCategoryAdapter.ViewHolder>() {
@@ -23,7 +24,7 @@ class RecyclerCategoryAdapter(val context: Context, val categoryList: ArrayList<
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         with(holder.binding) {
-            catImage.setImageResource(categoryList[position].categoryImage)
+            Picasso.get().load(categoryList[position].categoryImage).into(catImage)
             catTitle.text = categoryList[position].categoryTitle
         }
     }
