@@ -31,7 +31,7 @@
                         android:id="@+id/pd_img_back_button"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginLeft="4dp"
+                        android:layout_marginStart="4dp"
                         android:padding="11dp"
                         android:src="@drawable/baseline_arrow_back_ios_24" />
                 </androidx.cardview.widget.CardView>
@@ -82,7 +82,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="9dp"
-            android:text="Wireless HeadPhones"
+            android:text=""
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -93,7 +93,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:text="Rs 600.00"
+            android:text="\u20B9"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -224,9 +224,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="11dp"
-                android:text="Headphone"
+                android:text=""
                 android:textColor="#8A8A8A"
-                android:textSize="16dp" />
+                android:textSize="16sp" />
 
         </ScrollView>
 
@@ -304,7 +304,7 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/Cd_add_to_cart_button"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_margin="8dp"
                 android:layout_weight="1"

@@ -20,9 +20,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@color/white"
+        app:itemIconTint="@color/bnv_tab_item_foreground"
         app:itemActiveIndicatorStyle="@color/btn_color"
+        app:itemTextColor="@color/btn_color"
         app:itemHorizontalTranslationEnabled="true"
         app:itemTextAppearanceActive="@color/btn_color"
+
         app:menu="@menu/bottom_nav_menu" />
 
 </RelativeLayout>

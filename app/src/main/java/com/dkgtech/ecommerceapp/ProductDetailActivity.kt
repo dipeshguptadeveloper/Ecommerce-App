@@ -27,7 +27,7 @@ class ProductDetailActivity : AppCompatActivity() {
                     productModel = it.documents[0].toObject(ProductModel::class.java)!!
                     Picasso.get().load(productModel.productImage).into(binding.pdImgProductImage)
                     binding.pdTxtProductName.text = productModel.productTitle
-                    binding.pdTxtProductPrice.text = productModel.productPrice
+                    binding.pdTxtProductPrice.append(productModel.productPrice)
                     binding.pdTxtProductDescription.text = productModel.productDescription
                 }
             }

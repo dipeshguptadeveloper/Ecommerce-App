@@ -1,5 +1,7 @@
 package com.dkgtech.ecommerceapp
 
+import android.content.res.ColorStateList
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -14,21 +16,24 @@ import com.dkgtech.ecommerceapp.ui.ProfileFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private lateinit var fm: FragmentManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         with(binding) {
+            fm = supportFragmentManager
 
-            loadFragment(HomeFragment())
+            loadFragment(HomeFragment(), true)
+            bnView.selectedItemId = R.id.nav_home
 
             bnView.setOnItemSelectedListener { item ->
                 when (item.itemId) {
-                    R.id.nav_menu -> loadFragment(MenuFragment())
-                    R.id.nav_home -> loadFragment(HomeFragment())
-                    R.id.nav_fav -> loadFragment(FavouriteFragment())
-                    R.id.nav_cart -> loadFragment(CartFragment())
-                    R.id.nav_profile -> loadFragment(ProfileFragment())
+                    R.id.nav_menu -> loadFragment(MenuFragment(), false)
+                    R.id.nav_home -> loadFragment(HomeFragment(), false)
+                    R.id.nav_fav -> loadFragment(FavouriteFragment(), false)
+                    R.id.nav_cart -> loadFragment(CartFragment(), false)
+                    R.id.nav_profile -> loadFragment(ProfileFragment(), false)
                 }
                 true
             }
@@ -37,14 +42,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun loadFragment(fragment: Fragment) {
-        val fragmentManager: FragmentManager = supportFragmentManager
-        val transaction: FragmentTransaction = fragmentManager.beginTransaction()
-
-        // Replace the fragment_container with the new fragment
-        transaction.replace(R.id.container, fragment)
-        // Commit the transaction
-        transaction.attach(HomeFragment())
-        transaction.commit()
+    private fun loadFragment(frag: Fragment, flag: Boolean) {
+        val ft = fm.beginTransaction()
+        if (flag) {
+            ft.add(R.id.container, frag)
+        } else {
+            ft.replace(R.id.container, frag)
+        }
+        ft.commit()
     }
 }
